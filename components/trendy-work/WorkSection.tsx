@@ -3,67 +3,51 @@ import WorkItem from "./WorkItem";
 const works = [
   {
     index: "01",
-    title: "SMART BUSINESS PLATFORM",
+    title: "PRODUCT STRATEGY & EXPERIENCE DESIGN",
     description:
-      "A cloud-powered system enabling businesses to automate workflows, improve efficiency, and scale effortlessly.",
+      "Designing meaningful digital experiences that connect users to value. From concept to execution, we craft products that are intuitive, goal-driven, and ready to scale.",
+    highlight: "User-centric design • Product clarity • Strategic alignment",
     image: "/images/work1.jpg",
     layout: "image-left" as const,
   },
   {
     index: "02",
-    title: "AI-POWERED EXPERIENCE",
+    title: "SCALABLE SOFTWARE & DIGITAL SYSTEMS",
     description:
-      "Delivering predictive analytics and customer insights through advanced AI integrations.",
+      "Engineering robust, secure and high-performing platforms that enable businesses to operate smarter, integrate seamlessly, and grow confidently.",
+    highlight: "Performance • Reliability • Future-ready architecture",
     image: "/images/work2.jpg",
     layout: "image-right" as const,
   },
   {
     index: "03",
-    title: "FUTURE-READY SOLUTIONS",
+    title: "AI-POWERED INTELLIGENCE & AUTOMATION",
     description:
-      "Building modern digital ecosystems designed for performance, reliability, and security.",
+      "Integrating AI to unlock smarter decision-making, predictive analytics, and automated workflows—helping businesses respond faster and deliver enhanced customer experiences.",
+    highlight: "Predictive insights • Automation • Enhanced experience",
     image: "/images/work3.jpg",
     layout: "image-left" as const,
   },
+  {
+    index: "04",
+    title: "CONNECTED DIGITAL ECOSYSTEMS",
+    description:
+      "Building unified, interoperable digital environments where platforms, tools, and data work together to power seamless business operations.",
+    highlight: "System integration • Unified platforms • Business enablement",
+    image: "/images/work4.jpg",
+    layout: "image-right" as const,
+  },
 ];
-
-// {
-//   "section": "projects",
-//   "title": "OUR INNOVATIVE PROJECTS",
-//   "cta": "View All",
-//   "projects": [
-//     {
-//       "id": "01",
-//       "title": "SMART BUSINESS PLATFORM",
-//       "description": "A cloud-powered system enabling businesses to automate workflows, improve efficiency, and scale effortlessly.",
-//       "image": "/images/project-1.jpg"
-//     },
-//     {
-//       "id": "02",
-//       "title": "AI-POWERED EXPERIENCE",
-//       "description": "Delivering predictive analytics and customer insights through advanced AI integrations.",
-//       "image": "/images/project-2.jpg"
-//     },
-//     {
-//       "id": "03",
-//       "title": "FUTURE-READY SOLUTIONS",
-//       "description": "Building modern digital ecosystems designed for performance, reliability, and security.",
-//       "image": "/images/project-3.jpg"
-//     }
-//   ]
-// }
-
 
 export default function WorkSection() {
   return (
     <section id="services" className="py-16 max-w-6xl mx-auto px-6">
-      {/* Header */}
       <div className="flex justify-between items-center mb-10">
-        <h2 className="text-4xl font-semibold">OUR INNOVATIVE PROJECTS</h2>
-        <button className="text-sm">VIEW ALL</button>
+        <h2 className="text-2xl font-semibold">
+          Building Digital Experiences That Drive Real Impact
+        </h2>
       </div>
 
-      {/* Items */}
       {works.map((work, i) => (
         <WorkItem key={i} {...work} />
       ))}
