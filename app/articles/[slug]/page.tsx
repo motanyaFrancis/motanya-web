@@ -25,7 +25,7 @@ export default async function ArticleDetails({ params }: ArticleDetailsProps) {
         <div className="absolute inset-0 bg-black/40 rounded-b-3xl flex flex-col justify-end p-6 md:p-12">
           <h1 className="text-3xl md:text-5xl font-bold text-white">{article.title}</h1>
           <div className="flex items-center gap-4 mt-4 text-sm text-gray-200">
-            <span>Revo Admin</span>
+            <span>Motanya</span>
             <span>3 Mins Read</span>
             <span>{article.tag}</span>
           </div>
