@@ -100,7 +100,7 @@ export default function Footer() {
           <p className="flex items-center gap-1">
             powered by
             <span className="text-white font-semibold hover:text-emerald-400 transition cursor-pointer">
-              <Image src="/Logo-white.png" alt="Motanya Logo" width={100} height={20} />
+              <Image src="/logo-white.png" alt="Motanya Logo" width={100} height={20} />
             </span>
           </p>
         </div>
