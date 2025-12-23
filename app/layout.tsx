@@ -6,7 +6,7 @@ import Logo from '@/components/Logo'
 
 export const metadata: Metadata = {
   title: "Motanya",
-  description: "Live Free. Roam Wild",
+  description: "Innovation, with a Twist",
   icons: {
     icon: "/favicon.ico",
   },

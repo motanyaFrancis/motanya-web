@@ -1,11 +1,30 @@
 import Image from "next/image";
-
 import { articles } from "@/lib/articles";
 import { notFound } from "next/navigation";
 import { FaFacebookF, FaLinkedinIn, FaXTwitter, FaYoutube } from "react-icons/fa6";
+import { Metadata } from "next";
+import Link from "next/link";
 
 interface ArticleDetailsProps {
   params: Promise<{ slug: string }>;
+}
+
+// Optional: Dynamic Metadata for the article
+export async function generateMetadata({ params }: ArticleDetailsProps): Promise<Metadata> {
+  const { slug } = await params;
+  const article = articles.find(a => a.slug === slug);
+
+  if (!article) return { title: "Article Not Found" };
+
+  return {
+    title: article.title,
+    description: article.content.slice(0, 160), // first 160 chars
+    openGraph: {
+      title: article.title,
+      description: article.content.slice(0, 160),
+      images: [article.image],
+    },
+  };
 }
 
 export default async function ArticleDetails({ params }: ArticleDetailsProps) {
@@ -39,14 +58,32 @@ export default async function ArticleDetails({ params }: ArticleDetailsProps) {
         </div>
       </div>
 
+      {/* Breadcrumbs */}
+      <div className="bg-gray-200">
+        <div className="max-w-7xl mx-auto px-6 md:px-3 py-3 text-gray-600 text-sm">
+          <nav className="flex items-center gap-2">
+            <Link href="/" className="hover:underline">Home</Link>
+            <span>/</span>
+            <Link href="/articles" className="hover:underline">Articles</Link>
+            <span>/</span>
+            <span className="font-semibold text-gray-800 hidden md:inline">{article.title}</span>
+          </nav>
+        </div>
+      </div>
+
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-12 mt-12 px-6 md:px-0">
+      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-12 mt-6 px-6 md:px-3">
 
         {/* Left Column */}
-        <article className="flex-1 prose prose-lg max-w-none text-gray-800">
-          {article.content?.split("\n").map((p, i) => (
-            <p key={i}>{p}</p>
-          ))}
+        <article className="flex-1 prose prose-lg max-w-none text-gray-800 space-y-8">
+          {article.content
+            .split("\n\n")
+            .map(p => p.trim())
+            .filter(p => p.length)
+            .map((p, i) => (
+              <p key={i}>{p}</p>
+            ))
+          }
         </article>
 
         {/* Right Column */}
