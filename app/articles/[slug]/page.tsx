@@ -4,6 +4,8 @@ import { notFound } from "next/navigation";
 import { FaFacebookF, FaLinkedinIn, FaXTwitter, FaYoutube } from "react-icons/fa6";
 import { Metadata } from "next";
 import Link from "next/link";
+import ArticleCard from "@/components/articles/ArticleCard";
+import type { Article } from "@/lib/articles";
 
 interface ArticleDetailsProps {
   params: Promise<{ slug: string }>;
@@ -18,7 +20,7 @@ export async function generateMetadata({ params }: ArticleDetailsProps): Promise
 
   return {
     title: article.title,
-    description: article.content.slice(0, 160), // first 160 chars
+    description: article.content.slice(0, 160),
     openGraph: {
       title: article.title,
       description: article.content.slice(0, 160),
@@ -33,6 +35,12 @@ export default async function ArticleDetails({ params }: ArticleDetailsProps) {
 
   if (!article) return notFound();
 
+  // Related articles: same tag, excluding current article, max 3
+  const relatedArticles: Article[] = articles
+    .filter(a => a.tag === article.tag && a.slug !== article.slug)
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .slice(0, 3);
+
   return (
     <section className="w-full">
 
@@ -44,12 +52,10 @@ export default async function ArticleDetails({ params }: ArticleDetailsProps) {
           fill
           className="object-cover"
         />
-
         <div className="absolute inset-0 bg-black/40 flex flex-col justify-end px-6 md:px-12 pb-10">
           <h1 className="text-3xl md:text-5xl font-bold text-white max-w-7xl mx-auto">
             {article.title}
           </h1>
-
           <div className="flex items-center gap-4 mt-4 text-sm text-gray-200 max-w-7xl mx-auto">
             <span>Motanya</span>
             <span>3 Mins Read</span>
@@ -106,15 +112,12 @@ export default async function ArticleDetails({ params }: ArticleDetailsProps) {
             <button className="bg-gray-200 p-3 rounded hover:bg-gray-300 transition">
               <FaFacebookF size={18} />
             </button>
-
             <button className="bg-gray-200 p-3 rounded hover:bg-gray-300 transition">
               <FaXTwitter size={18} />
             </button>
-
             <button className="bg-gray-200 p-3 rounded hover:bg-gray-300 transition">
               <FaLinkedinIn size={18} />
             </button>
-
             <button className="bg-gray-200 p-3 rounded hover:bg-gray-300 transition">
               <FaYoutube size={18} />
             </button>
@@ -123,6 +126,19 @@ export default async function ArticleDetails({ params }: ArticleDetailsProps) {
         </aside>
 
       </div>
+
+      {/* Related Articles */}
+      {relatedArticles.length > 0 && (
+        <section className="max-w-7xl mx-auto px-6 mt-16">
+          <h3 className="text-2xl font-bold mb-6">Related Insights</h3>
+          <div className="grid md:grid-cols-3 gap-8">
+            {relatedArticles.map(a => (
+              <ArticleCard key={a.slug} {...a} />
+            ))}
+          </div>
+        </section>
+      )}
+
     </section>
   );
 }

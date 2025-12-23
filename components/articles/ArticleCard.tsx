@@ -18,11 +18,12 @@ export default function ArticleCard({ title, date, tag, image, slug }: Props) {
           width={500}
           height={300}
           alt={title}
-          className="w-full object-cover rounded-lg"
+          className="w-full object-cover rounded-lg aspect-[16/10] shadow-md"
         />
 
         <div className="mt-3 text-sm text-gray-500">{date} — {tag}</div>
         <h3 className="font-semibold mt-1">{title}</h3>
+        <div className="text-emerald-600 font-semibold hover:underline mt-4 block">Read More →</div>
       </div>
     </Link>
   );
