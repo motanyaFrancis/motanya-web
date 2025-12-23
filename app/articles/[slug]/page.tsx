@@ -1,6 +1,8 @@
 import Image from "next/image";
+
 import { articles } from "@/lib/articles";
 import { notFound } from "next/navigation";
+import { FaFacebookF, FaLinkedinIn, FaXTwitter, FaYoutube } from "react-icons/fa6";
 
 interface ArticleDetailsProps {
   params: Promise<{ slug: string }>;
@@ -13,18 +15,23 @@ export default async function ArticleDetails({ params }: ArticleDetailsProps) {
   if (!article) return notFound();
 
   return (
-    <section className="max-w-7xl mx-auto">
-      {/* Hero Section */}
-      <div className="relative h-[400px] md:h-[500px] w-full">
+    <section className="w-full">
+
+      {/* Full Width Hero */}
+      <div className="relative w-full h-[400px] md:h-[500px]">
         <Image
           src={article.image}
           alt={article.title}
           fill
-          className="object-cover rounded-b-3xl"
+          className="object-cover"
         />
-        <div className="absolute inset-0 bg-black/40 rounded-b-3xl flex flex-col justify-end p-6 md:p-12">
-          <h1 className="text-3xl md:text-5xl font-bold text-white">{article.title}</h1>
-          <div className="flex items-center gap-4 mt-4 text-sm text-gray-200">
+
+        <div className="absolute inset-0 bg-black/40 flex flex-col justify-end px-6 md:px-12 pb-10">
+          <h1 className="text-3xl md:text-5xl font-bold text-white max-w-7xl mx-auto">
+            {article.title}
+          </h1>
+
+          <div className="flex items-center gap-4 mt-4 text-sm text-gray-200 max-w-7xl mx-auto">
             <span>Motanya</span>
             <span>3 Mins Read</span>
             <span>{article.tag}</span>
@@ -32,18 +39,20 @@ export default async function ArticleDetails({ params }: ArticleDetailsProps) {
         </div>
       </div>
 
-      {/* Content Section */}
-      <div className="flex flex-col lg:flex-row gap-12 mt-12 px-6 md:px-0">
-        {/* Left Column - Article */}
+      {/* Main Content */}
+      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-12 mt-12 px-6 md:px-0">
+
+        {/* Left Column */}
         <article className="flex-1 prose prose-lg max-w-none text-gray-800">
           {article.content?.split("\n").map((p, i) => (
             <p key={i}>{p}</p>
           ))}
         </article>
 
-        {/* Right Column - TOC + Share */}
+        {/* Right Column */}
         <aside className="w-full lg:w-64 flex flex-col gap-6 sticky top-24">
-          {/* Table of Contents */}
+
+          {/* TOC */}
           <div className="border-l-2 border-gray-300 pl-4">
             <h4 className="font-semibold mb-2">On This Page</h4>
             <ul className="space-y-2 text-gray-700 text-sm">
@@ -55,14 +64,27 @@ export default async function ArticleDetails({ params }: ArticleDetailsProps) {
             </ul>
           </div>
 
-          {/* Share Buttons */}
+          {/* Share */}
           <div className="flex gap-3">
-            <button className="bg-gray-200 p-2 rounded">FB</button>
-            <button className="bg-gray-200 p-2 rounded">TW</button>
-            <button className="bg-gray-200 p-2 rounded">LI</button>
-            <button className="bg-gray-200 p-2 rounded">YT</button>
+            <button className="bg-gray-200 p-3 rounded hover:bg-gray-300 transition">
+              <FaFacebookF size={18} />
+            </button>
+
+            <button className="bg-gray-200 p-3 rounded hover:bg-gray-300 transition">
+              <FaXTwitter size={18} />
+            </button>
+
+            <button className="bg-gray-200 p-3 rounded hover:bg-gray-300 transition">
+              <FaLinkedinIn size={18} />
+            </button>
+
+            <button className="bg-gray-200 p-3 rounded hover:bg-gray-300 transition">
+              <FaYoutube size={18} />
+            </button>
           </div>
+
         </aside>
+
       </div>
     </section>
   );

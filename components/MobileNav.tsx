@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { Menu, X } from 'lucide-react'
+import { CiMenuKebab } from "react-icons/ci";
 
 import { navItems } from '@/lib/navigation' 
 const links = navItems.map((item) => item.label)
@@ -14,9 +15,9 @@ export default function MobileNav() {
       {/* Toggle Button */}
       <button
         onClick={() => setOpen(true)}
-        className="lg:hidden fixed top-4 right-4 z-50 bg-emerald-600 text-white p-2 rounded-full"
+        className="lg:hidden fixed top-4 right-4 z-50 text-black p-2 rounded-full"
       >
-        <Menu size={20} />
+        <CiMenuKebab size={20} />
       </button>
 
       {/* Overlay */}
@@ -31,7 +32,7 @@ export default function MobileNav() {
       >
         <button
           onClick={() => setOpen(false)}
-          className="absolute top-4 right-4 bg-emerald-600 text-white p-2 rounded-full"
+          className="absolute top-4 right-4  text-red-500 hover:bg-red-500/50 hover:text-white p-2 rounded-full"
         >
           <X size={18} />
         </button>
