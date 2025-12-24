@@ -1,3 +1,4 @@
+import { Link } from "lucide-react";
 import Image from "next/image";
 
 export default function Footer() {
@@ -99,9 +100,7 @@ export default function Footer() {
 
           <p className="flex items-center gap-1">
             powered by
-            <span className="text-white font-semibold hover:text-emerald-400 transition cursor-pointer">
-              <Image src="/logo-white.png" alt="Motanya Logo" width={100} height={20} />
-            </span>
+            <Image src="/logo-white.png" alt="Motanya Logo" width={100} height={20} />
           </p>
         </div>
       </div>

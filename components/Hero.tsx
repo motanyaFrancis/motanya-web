@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useRef } from "react"
 import { FaFacebook, FaInstagram, FaLinkedinIn, FaXTwitter } from "react-icons/fa6"
+import Link from "next/link"
 
 type Slide = {
     type: "video" | "image"
@@ -175,10 +176,10 @@ export default function Hero() {
                     </div>
 
                     {/* CTA */}
-                    <button className="absolute uppercase bottom-8 left-6 mt-auto inline-flex w-fit items-center gap-2 bg-white text-black px-5 py-3 text-xs font-semibold hover:bg-white/90 transition">
+                    <Link href="/contact" className="absolute uppercase bottom-8 left-6 mt-auto inline-flex w-fit items-center gap-2 bg-white text-black px-5 py-3 text-xs font-semibold hover:bg-white/90 transition">
                         Let's Connect
                         <span className="w-2 h-2 rounded-full bg-orange-500" />
-                    </button>
+                    </Link>
                 </div>
 
                 {/* DESKTOP HEADING */}
