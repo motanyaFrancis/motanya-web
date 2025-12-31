@@ -24,20 +24,56 @@ const contactInfo = [
     { label: "Email", value: "francismotanya@outlook.com", href: "mailto:francismotanya@outlook.com" },
     { label: "LinkedIn", value: "motanyaFrancis", href: "https://www.linkedin.com/in/motanyaFrancis" },
     { label: "Instagram", value: "@motanyaFrancis", href: "https://instagram.com/motanyaFrancis" },
-    { label: "X", value: "Motanya Nyabanga", href: "https://x.com/motanyafrancis" }
+    { label: "X", value: "Motanya Nyabanga", href: "https://x.com/motanyafrancis" },
+    { label: "call", value: "+254 719 397014", href: "tel:+254719397014" },
 ]
-
 
 export default function ContactPage() {
     const [selectedService, setSelectedService] = useState<string | null>(null)
     const [selectedBudget, setSelectedBudget] = useState<string | null>(null)
 
+    const [name, setName] = useState("")
+    const [email, setEmail] = useState("")
+    const [message, setMessage] = useState("")
+    const [loading, setLoading] = useState(false)
+
+    const handleSubmit = async () => {
+        if (!name || !email) {
+            alert("Please fill in your name and email.")
+            return
+        }
+
+        setLoading(true)
+
+        const res = await fetch("/api/contact", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                service: selectedService,
+                budget: selectedBudget,
+                name,
+                email,
+                message
+            })
+        })
+
+        setLoading(false)
+
+        if (res.ok) {
+            alert("Message sent successfully 🎉")
+            setName("")
+            setEmail("")
+            setMessage("")
+            setSelectedService(null)
+            setSelectedBudget(null)
+        } else {
+            alert("Failed to send message ❌")
+        }
+    }
+
     return (
         <section className="relative max-w-7xl mx-auto py-16 md:py-24 w-full bg-[repeating-linear-gradient( to right, transparent, transparent 24.5%, #e5e5e5 25%, transparent 25.5%)]">
-            {/* Padding wrapper */}
             <div className="px-6 md:px-10">
-
-                {/* Responsive grid — stacks on mobile */}
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-10 relative z-10">
 
                     {/* Title */}
@@ -50,18 +86,15 @@ export default function ContactPage() {
                     {/* Intro + Contacts */}
                     <div className="md:col-span-2 space-y-6 pt-4 md:pt-6 flex flex-col justify-between max-w-[500px]">
                         <p className="text-gray-700 leading-relaxed text-[15px] md:text-base">
-                            Every great project begins with a conversation. Whether
-                            you’re looking to collaborate on a campaign, bring a
-                            concept to life on screen, or simply exchange ideas,
-                            I’d love to hear from you.
+                            Every great project begins with a conversation. Whether you’re looking
+                            to collaborate on a campaign, bring a concept to life on screen, or
+                            simply exchange ideas, I’d love to hear from you.
                         </p>
 
-                        {/* Contact info */}
                         <div className="pt-6 space-y-2 text-[14px] md:text-[15px]">
                             {contactInfo.map((item) => (
                                 <div key={item.label} className="grid grid-cols-2">
                                     <span className="uppercase">{item.label}</span>
-
                                     <a
                                         href={item.href}
                                         target="_blank"
@@ -73,7 +106,6 @@ export default function ContactPage() {
                                 </div>
                             ))}
                         </div>
-
                     </div>
 
                     {/* Form Section */}
@@ -87,13 +119,12 @@ export default function ContactPage() {
                                     <button
                                         key={s}
                                         onClick={() => setSelectedService(s)}
-                                        className={`
-                                        px-4 py-2 rounded-full border text-sm
-                                        ${selectedService === s
+                                        className={`px-4 py-2 rounded-full border text-sm
+                                                ${selectedService === s
                                                 ? "bg-black text-white"
-                                                : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-                                            }
-                                        `}>
+                                                : "bg-gray-200 text-gray-700 hover:bg-gray-300"}
+                                            `}
+                                    >
                                         {s}
                                     </button>
                                 ))}
@@ -108,13 +139,12 @@ export default function ContactPage() {
                                     <button
                                         key={b}
                                         onClick={() => setSelectedBudget(b)}
-                                        className={`
-                                            px-4 py-2 rounded-full border text-sm
-                                            ${selectedBudget === b
+                                        className={`px-4 py-2 rounded-full border text-sm
+                      ${selectedBudget === b
                                                 ? "bg-black text-white"
-                                                : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-                                            }
-                                        `}>
+                                                : "bg-gray-200 text-gray-700 hover:bg-gray-300"}
+                    `}
+                                    >
                                         {b}
                                     </button>
                                 ))}
@@ -125,32 +155,45 @@ export default function ContactPage() {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
                             <div>
                                 <p className="uppercase text-sm mb-2">Name</p>
-                                <input className="w-full border-b outline-none pb-1" />
+                                <input
+                                    className="w-full border-b outline-none pb-1"
+                                    value={name}
+                                    onChange={(e) => setName(e.target.value)}
+                                />
                             </div>
 
                             <div>
                                 <p className="uppercase text-sm mb-2">Email</p>
-                                <input className="w-full border-b outline-none pb-1" />
+                                <input
+                                    className="w-full border-b outline-none pb-1"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                />
                             </div>
                         </div>
 
                         {/* Textarea */}
                         <div>
-                            <p className="uppercase text-sm mb-2">
-                                Project Details (Optional)
-                            </p>
+                            <p className="uppercase text-sm mb-2">Project Details (Optional)</p>
                             <textarea
                                 rows={4}
                                 className="w-full border-b outline-none"
+                                value={message}
+                                onChange={(e) => setMessage(e.target.value)}
                             />
                         </div>
 
                         {/* Submit */}
                         <div className="flex justify-end">
-                            <button className="uppercase text-emerald-500 font-semibold">
-                                Submit →
+                            <button
+                                onClick={handleSubmit}
+                                disabled={loading}
+                                className="uppercase text-emerald-500 font-semibold"
+                            >
+                                {loading ? "Sending..." : "Submit →"}
                             </button>
                         </div>
+
                     </div>
 
                 </div>

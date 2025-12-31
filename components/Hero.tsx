@@ -150,10 +150,10 @@ export default function Hero() {
                                                     : thumbnails[slide.src] || "/fallback-thumbnail.jpg"
                                             }
                                             className={`
-                        absolute inset-0 w-full h-full object-cover
-                        transition-all duration-700 ease-out
-                        ${index === current ? "opacity-100 scale-100" : "opacity-0 scale-105"}
-                      `}
+                                                absolute inset-0 w-full h-full object-cover
+                                                transition-all duration-700 ease-out
+                                                ${index === current ? "opacity-100 scale-100" : "opacity-0 scale-105"}
+                                            `}
                                         />
                                     ))}
                                 </div>

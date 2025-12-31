@@ -50,7 +50,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 text-sm text-gray-50">
 
           {/* Column 1 */}
-          <div className="space-y-2">
+          {/* <div className="space-y-2">
             <h3 className="font-semibold text-white mb-3">Information</h3>
             <ul className="space-y-2">
               <li className="hover:text-white transition">Our Company</li>
@@ -59,35 +59,35 @@ export default function Footer() {
               <li className="hover:text-white transition">Contact Us</li>
               <li className="hover:text-white transition">Support</li>
             </ul>
-          </div>
+          </div> */}
 
           {/* Column 2 */}
-          <div className="space-y-2">
+          {/* <div className="space-y-2">
             <h3 className="font-semibold text-white mb-3">Application</h3>
             <ul className="space-y-2">
               <li className="hover:text-white transition">Download</li>
               <li className="hover:text-white transition">Bike Provider</li>
               <li className="hover:text-white transition">How to Use</li>
             </ul>
-          </div>
+          </div> */}
 
           {/* Column 3 */}
-          <div className="space-y-2">
+          {/* <div className="space-y-2">
             <h3 className="font-semibold text-white mb-3">API</h3>
             <ul className="space-y-2">
               <li className="hover:text-white transition">Documentation</li>
               <li className="hover:text-white transition">Credentials</li>
               <li className="hover:text-white transition">Developer Info</li>
             </ul>
-          </div>
+          </div> */}
 
           {/* Column 4 */}
-          <div className="space-y-2">
+          {/* <div className="space-y-2">
             <h3 className="font-semibold text-white mb-3">Brand</h3>
             <p className="text-gray-50 text-sm">
               Professional tech solutions to build powerful digital products.
             </p>
-          </div>
+          </div> */}
         </div>
 
         {/* Bottom Section */}

@@ -23,8 +23,8 @@ export default function RootLayout({
 
         {/* Desktop / Tablet Logo */}
         <div className="hidden md:flex fixed top-6 right-0 z-[999] max-w-6xl mx-auto">
-          <div className="bg-white px-6 py-4 rounded-l-full shadow-lg border border-0 border-r-16 border-emerald-600">
-            <Logo className="w-40 h-9"/>
+          <div className="bg-white px-6 pl-8 py-4 rounded-l-full shadow-lg border border-0 border-r-16 border-emerald-600">
+            <Logo className="w-40 h-10"/>
           </div>
         </div>
 
